@@ -1,5 +1,6 @@
 from PySimpleGUI import *
 from datetime import datetime
+import os
 
 def make_date(year,month,day):
 	return datetime(year=int(year),month=int(month),day=int(day)).strftime("%Y-%m-%d")
@@ -46,7 +47,8 @@ def loop():
 
 		# Start downloader
 		if flag:
-			subprocess.call(["downloader.exe"],shell = True)
+			subprocess.Popen(["downloader.exe"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+			# os.spawnl(os.P_DETACH,"downloader.exe")
 			flag = 0
 			window["out"].update("Done!")
 
